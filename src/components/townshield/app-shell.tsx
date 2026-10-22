@@ -37,7 +37,7 @@ function NavLinks({ compact = false }: { compact?: boolean }) {
           <Link
             key={to}
             to={to}
-            search={to === "/inspect" ? {} : undefined}
+            search={{}}
             className={cn(
               "flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors",
               compact && "shrink-0 px-3 py-1.5",

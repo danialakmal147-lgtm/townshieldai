@@ -14,6 +14,7 @@ import { detectAnomaly } from "@/lib/townshield/scoring";
 import type { Reading } from "@/lib/townshield/types";
 
 export function TelemetryChart({ readings, height = 240 }: { readings: Reading[]; height?: number }) {
+  if (!readings.length) return <p className="text-sm text-muted-foreground">No telemetry yet.</p>;
   const result = detectAnomaly(readings.map((r) => r.temp));
   const data = readings.map((r) => ({
     time: new Date(r.t).toLocaleTimeString("en-MY", { hour: "2-digit", minute: "2-digit", hour12: false, timeZone: "Asia/Kuala_Lumpur" }),

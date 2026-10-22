@@ -153,7 +153,7 @@ function InspectionForm({ assetId }: { assetId: string }) {
   const wo = activeWorkOrder(state, asset.id);
   const items = CHECKLIST[asset.type];
   const [checks, setChecks] = useState<Record<string, boolean | undefined>>({});
-  const [technician, setTechnician] = useState(TECHNICIANS[0]);
+  const [technician, setTechnician] = useState<string>(TECHNICIANS[0]!);
   const [notes, setNotes] = useState("");
   const [part, setPart] = useState("");
   const [photo, setPhoto] = useState<string>();

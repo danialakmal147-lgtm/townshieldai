@@ -29,7 +29,7 @@ function median(xs: number[]) {
   if (!xs.length) return 0;
   const s = [...xs].sort((a, b) => a - b);
   const m = Math.floor(s.length / 2);
-  return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
+  return s.length % 2 ? s[m]! : (s[m - 1]! + s[m]!) / 2;
 }
 
 function InsightsPage() {
@@ -103,7 +103,7 @@ function InsightsPage() {
             </div>
           }
         >
-          <TelemetryChart readings={state.telemetry[panel]} />
+          <TelemetryChart readings={state.telemetry[panel] ?? []} />
         </Panel>
 
         <Panel className="lg:col-span-2" eyebrow="Portfolio" title="Readiness by site">
@@ -168,7 +168,7 @@ function FaultTable() {
     .forEach((f) => counts.set(f.assetId, (counts.get(f.assetId) ?? 0) + 1));
   const rows = [...counts.entries()].sort((a, b) => b[1] - a[1]);
   if (!rows.length) return <p className="text-sm text-muted-foreground">No faults in the window.</p>;
-  const max = rows[0][1];
+  const max = rows[0]![1];
   return (
     <ul className="space-y-2">
       {rows.map(([id, c]) => (
