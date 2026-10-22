@@ -1,6 +1,6 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { ArrowLeft, Camera, Check, CheckCircle2, Nfc, ScanLine, X, XCircle } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { toast } from "sonner";
 
 import { PageHeader, PriorityBadge } from "@/components/townshield/bits";
@@ -158,10 +158,6 @@ function InspectionForm({ assetId }: { assetId: string }) {
   const [part, setPart] = useState("");
   const [photo, setPhoto] = useState<string>();
   const [done, setDone] = useState<null | { result: "pass" | "fail"; woId?: string }>(null);
-
-  useEffect(() => {
-    if (wo?.faultId && asset.type === "emergency_light" && !part) setPart("");
-  }, [wo, asset.type, part]);
 
   const answered = items.every((i) => checks[i] !== undefined);
   const failed = items.filter((i) => checks[i] === false);

@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as InspectRouteImport } from './routes/inspect'
 import { Route as WorkOrdersRouteImport } from './routes/work-orders'
 import { Route as AssetsIndexRouteImport } from './routes/assets.index'
 import { Route as AssetsAssetIdRouteImport } from './routes/assets.$assetId'
@@ -17,6 +18,11 @@ import { Route as AssetsAssetIdRouteImport } from './routes/assets.$assetId'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InspectRoute = InspectRouteImport.update({
+  id: '/inspect',
+  path: '/inspect',
   getParentRoute: () => rootRouteImport,
 } as any)
 const WorkOrdersRoute = WorkOrdersRouteImport.update({
@@ -37,12 +43,14 @@ const AssetsAssetIdRoute = AssetsAssetIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/inspect': typeof InspectRoute
   '/work-orders': typeof WorkOrdersRoute
   '/assets/$assetId': typeof AssetsAssetIdRoute
   '/assets/': typeof AssetsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/inspect': typeof InspectRoute
   '/work-orders': typeof WorkOrdersRoute
   '/assets/$assetId': typeof AssetsAssetIdRoute
   '/assets': typeof AssetsIndexRoute
@@ -50,20 +58,28 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/inspect': typeof InspectRoute
   '/work-orders': typeof WorkOrdersRoute
   '/assets/$assetId': typeof AssetsAssetIdRoute
   '/assets/': typeof AssetsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/work-orders' | '/assets/$assetId' | '/assets/'
+  fullPaths: '/' | '/inspect' | '/work-orders' | '/assets/$assetId' | '/assets/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/work-orders' | '/assets/$assetId' | '/assets'
-  id: '__root__' | '/' | '/work-orders' | '/assets/$assetId' | '/assets/'
+  to: '/' | '/inspect' | '/work-orders' | '/assets/$assetId' | '/assets'
+  id:
+    | '__root__'
+    | '/'
+    | '/inspect'
+    | '/work-orders'
+    | '/assets/$assetId'
+    | '/assets/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  InspectRoute: typeof InspectRoute
   WorkOrdersRoute: typeof WorkOrdersRoute
   AssetsAssetIdRoute: typeof AssetsAssetIdRoute
   AssetsIndexRoute: typeof AssetsIndexRoute
@@ -76,6 +92,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/inspect': {
+      id: '/inspect'
+      path: '/inspect'
+      fullPath: '/inspect'
+      preLoaderRoute: typeof InspectRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/work-orders': {
@@ -104,6 +127,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  InspectRoute: InspectRoute,
   WorkOrdersRoute: WorkOrdersRoute,
   AssetsAssetIdRoute: AssetsAssetIdRoute,
   AssetsIndexRoute: AssetsIndexRoute,
