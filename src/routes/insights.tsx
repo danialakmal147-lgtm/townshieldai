@@ -109,7 +109,7 @@ function InsightsPage() {
         <Panel className="lg:col-span-2" eyebrow="Portfolio" title="Readiness by site">
           <div className="h-56">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={siteData} margin={{ top: 8, right: 8, left: -20, bottom: 0 }}>
+              <BarChart data={siteData} margin={{ top: 22, right: 8, left: -20, bottom: 0 }}>
                 <CartesianGrid stroke="var(--color-border)" vertical={false} />
                 <XAxis dataKey="name" tick={{ fill: "var(--color-muted-foreground)", fontSize: 11 }} tickLine={false} axisLine={false} />
                 <YAxis domain={[0, 100]} tick={{ fill: "var(--color-muted-foreground)", fontSize: 10 }} tickLine={false} axisLine={false} />

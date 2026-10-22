@@ -119,7 +119,7 @@ function Overview() {
                   Fire Safety Readiness Score · operational indicator, not legal certification
                 </span>
               </div>
-              <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
+              <div className="grid grid-cols-2 gap-3 xl:grid-cols-4">
                 <Stat label="Assets monitored" value={`${state.assets.length}`} sub={`${Math.round((visible / state.assets.length) * 100)}% visible`} />
                 <Stat label="Open work orders" value={`${openWOs.length}`} sub={`${openWOs.filter((w) => w.priority === "P1").length} P1`} />
                 <Stat label="Critical exceptions" value={`${township.exceptions.length}`} tone={township.exceptions.length ? "critical" : "ok"} />

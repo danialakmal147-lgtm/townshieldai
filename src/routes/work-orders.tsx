@@ -118,7 +118,7 @@ function WOCard({
     <article className={cn("panel animate-rise p-3", wo.priority === "P1" && wo.status !== "closed" && "border-critical/50")}>
       <div className="flex items-center gap-2">
         <PriorityBadge priority={wo.priority} />
-        <span className="font-mono text-xs text-muted-foreground">{wo.id}</span>
+        <span className="whitespace-nowrap font-mono text-xs text-muted-foreground">{wo.id}</span>
         {wo.status !== "closed" && (
           <span className={cn("ml-auto flex items-center gap-1 font-mono text-[11px]", late ? "text-critical" : "text-muted-foreground")}>
             <Clock className="size-3" />
