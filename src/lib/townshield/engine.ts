@@ -172,7 +172,7 @@ export function reducer(s: TownState, action: Action): TownState {
     case "simulate_anomaly": {
       const series = s.telemetry[action.assetId];
       if (!series?.length) return s;
-      const last = series[series.length - 1];
+      const last = series[series.length - 1]!;
       const step = 30 * 60_000;
       const rise = [6.4, 9.1, 11.7];
       const added = rise.map((d, i) => ({
@@ -183,7 +183,7 @@ export function reducer(s: TownState, action: Action): TownState {
       const nextSeries = [...series, ...added];
       let next: TownState = { ...s, telemetry: { ...s.telemetry, [action.assetId]: nextSeries } };
       const result = detectAnomaly(nextSeries.map((r) => r.temp));
-      const peak = added[added.length - 1].temp;
+      const peak = added[added.length - 1]!.temp;
       next = audit(next, {
         at: action.at,
         actor: "Anomaly model",

@@ -241,7 +241,7 @@ function Overview() {
             <ul className="space-y-2.5">
               {township.drivers.slice(0, 6).map((d) => {
                 const a = assetById.get(d.assetId)!;
-                const max = township.drivers[0].points;
+                const max = township.drivers[0]!.points;
                 return (
                   <li key={d.assetId}>
                     <Link to="/assets/$assetId" params={{ assetId: a.id }} className="group block">

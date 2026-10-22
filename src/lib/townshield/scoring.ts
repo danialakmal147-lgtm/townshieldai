@@ -172,7 +172,7 @@ export function scoreGroup(
   let weighted = 0;
   const drivers: GroupScore["drivers"] = [];
   assetScores.forEach((s, i) => {
-    const w = CRITICALITY_WEIGHT[assets[i].criticality];
+    const w = CRITICALITY_WEIGHT[assets[i]!.criticality];
     weighted += s.score * w;
     const points = ((100 - s.score) * w) / totalW;
     if (points > 0.05) drivers.push({ assetId: s.assetId, points, reasons: s.reasons });

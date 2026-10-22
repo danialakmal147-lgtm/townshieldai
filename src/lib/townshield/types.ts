@@ -49,7 +49,7 @@ export interface Asset {
   owner: string;
   lastInspection: number;
   inspectionIntervalDays: number;
-  openFaultId?: string;
+  openFaultId?: string | undefined;
   installedYear: number;
 }
 
@@ -60,14 +60,14 @@ export interface Fault {
   description: string;
   source: string;
   detectedAt: number;
-  resolvedAt?: number;
+  resolvedAt?: number | undefined;
 }
 
 export interface Evidence {
   technician: string;
   notes: string;
-  partReplaced?: string;
-  photo?: string;
+  partReplaced?: string | undefined;
+  photo?: string | undefined;
   result: "pass" | "fail";
   submittedAt: number;
 }
@@ -75,17 +75,17 @@ export interface Evidence {
 export interface WorkOrder {
   id: string;
   assetId: string;
-  faultId?: string;
+  faultId?: string | undefined;
   title: string;
   priority: Priority;
   status: WorkOrderStatus;
   assignee: string;
   createdAt: number;
   dueAt: number;
-  acknowledgedAt?: number;
-  evidence?: Evidence;
-  closedAt?: number;
-  closedBy?: string;
+  acknowledgedAt?: number | undefined;
+  evidence?: Evidence | undefined;
+  closedAt?: number | undefined;
+  closedBy?: string | undefined;
 }
 
 export type AuditKind =
@@ -104,7 +104,7 @@ export interface AuditEvent {
   actor: string;
   kind: AuditKind;
   message: string;
-  assetId?: string;
+  assetId?: string | undefined;
 }
 
 export interface Reading {

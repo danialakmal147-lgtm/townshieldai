@@ -13,8 +13,8 @@ import { ASSET_TYPE_LABEL, type AssetType } from "@/lib/townshield/types";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/inspect")({
-  validateSearch: (search: Record<string, unknown>): { asset?: string } => ({
-    asset: typeof search.asset === "string" ? search.asset : undefined,
+  validateSearch: (search: Record<string, unknown>): { asset?: string | undefined } => ({
+    asset: typeof search["asset"] === "string" ? search["asset"] : undefined,
   }),
   head: () => ({
     meta: [
@@ -81,7 +81,7 @@ function InspectPage() {
   );
 }
 
-function Scanner({ unknown }: { unknown?: string }) {
+function Scanner({ unknown }: { unknown?: string | undefined }) {
   const { state } = useTown();
   const navigate = useNavigate();
   const [code, setCode] = useState("");
@@ -157,7 +157,7 @@ function InspectionForm({ assetId }: { assetId: string }) {
   const [notes, setNotes] = useState("");
   const [part, setPart] = useState("");
   const [photo, setPhoto] = useState<string>();
-  const [done, setDone] = useState<null | { result: "pass" | "fail"; woId?: string }>(null);
+  const [done, setDone] = useState<null | { result: "pass" | "fail"; woId?: string | undefined }>(null);
 
   const answered = items.every((i) => checks[i] !== undefined);
   const failed = items.filter((i) => checks[i] === false);

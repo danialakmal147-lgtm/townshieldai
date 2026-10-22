@@ -10,6 +10,8 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuditRouteImport } from './routes/audit'
+import { Route as InsightsRouteImport } from './routes/insights'
 import { Route as InspectRouteImport } from './routes/inspect'
 import { Route as WorkOrdersRouteImport } from './routes/work-orders'
 import { Route as AssetsIndexRouteImport } from './routes/assets.index'
@@ -18,6 +20,16 @@ import { Route as AssetsAssetIdRouteImport } from './routes/assets.$assetId'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuditRoute = AuditRouteImport.update({
+  id: '/audit',
+  path: '/audit',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InsightsRoute = InsightsRouteImport.update({
+  id: '/insights',
+  path: '/insights',
   getParentRoute: () => rootRouteImport,
 } as any)
 const InspectRoute = InspectRouteImport.update({
@@ -43,6 +55,8 @@ const AssetsAssetIdRoute = AssetsAssetIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/audit': typeof AuditRoute
+  '/insights': typeof InsightsRoute
   '/inspect': typeof InspectRoute
   '/work-orders': typeof WorkOrdersRoute
   '/assets/$assetId': typeof AssetsAssetIdRoute
@@ -50,6 +64,8 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/audit': typeof AuditRoute
+  '/insights': typeof InsightsRoute
   '/inspect': typeof InspectRoute
   '/work-orders': typeof WorkOrdersRoute
   '/assets/$assetId': typeof AssetsAssetIdRoute
@@ -58,6 +74,8 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/audit': typeof AuditRoute
+  '/insights': typeof InsightsRoute
   '/inspect': typeof InspectRoute
   '/work-orders': typeof WorkOrdersRoute
   '/assets/$assetId': typeof AssetsAssetIdRoute
@@ -65,12 +83,28 @@ export interface FileRoutesById {
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/inspect' | '/work-orders' | '/assets/$assetId' | '/assets/'
+  fullPaths:
+    | '/'
+    | '/audit'
+    | '/insights'
+    | '/inspect'
+    | '/work-orders'
+    | '/assets/$assetId'
+    | '/assets/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/inspect' | '/work-orders' | '/assets/$assetId' | '/assets'
+  to:
+    | '/'
+    | '/audit'
+    | '/insights'
+    | '/inspect'
+    | '/work-orders'
+    | '/assets/$assetId'
+    | '/assets'
   id:
     | '__root__'
     | '/'
+    | '/audit'
+    | '/insights'
     | '/inspect'
     | '/work-orders'
     | '/assets/$assetId'
@@ -79,6 +113,8 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuditRoute: typeof AuditRoute
+  InsightsRoute: typeof InsightsRoute
   InspectRoute: typeof InspectRoute
   WorkOrdersRoute: typeof WorkOrdersRoute
   AssetsAssetIdRoute: typeof AssetsAssetIdRoute
@@ -92,6 +128,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/audit': {
+      id: '/audit'
+      path: '/audit'
+      fullPath: '/audit'
+      preLoaderRoute: typeof AuditRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/insights': {
+      id: '/insights'
+      path: '/insights'
+      fullPath: '/insights'
+      preLoaderRoute: typeof InsightsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/inspect': {
@@ -127,6 +177,8 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuditRoute: AuditRoute,
+  InsightsRoute: InsightsRoute,
   InspectRoute: InspectRoute,
   WorkOrdersRoute: WorkOrdersRoute,
   AssetsAssetIdRoute: AssetsAssetIdRoute,
