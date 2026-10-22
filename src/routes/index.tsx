@@ -12,6 +12,7 @@ import {
 import { toast } from "sonner";
 
 import {
+  KIND_DOT,
   Panel,
   PageHeader,
   ReadinessBadge,
@@ -21,7 +22,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { inspectionState } from "@/lib/townshield/scoring";
 import { useScores, useTown } from "@/lib/townshield/store";
-import type { AuditKind } from "@/lib/townshield/types";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/")({
@@ -42,16 +42,6 @@ export const Route = createFileRoute("/")({
   component: Overview,
 });
 
-export const KIND_DOT: Record<AuditKind, string> = {
-  fault: "bg-critical",
-  anomaly: "bg-critical",
-  work_order: "bg-warning",
-  inspection: "bg-info",
-  verification: "bg-success",
-  score: "bg-primary",
-  insight: "bg-primary",
-  system: "bg-muted-foreground",
-};
 
 function Overview() {
   const { state, now, dispatch } = useTown();

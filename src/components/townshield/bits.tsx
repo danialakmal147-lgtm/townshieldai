@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import type { InspectionStatus, ReadinessStatus } from "@/lib/townshield/scoring";
-import type { Condition, Criticality, Priority, WorkOrderStatus } from "@/lib/townshield/types";
+import type { AuditKind, Condition, Criticality, Priority, WorkOrderStatus } from "@/lib/townshield/types";
 
 export const READINESS_LABEL: Record<ReadinessStatus, string> = {
   critical: "Critical exception",
@@ -210,3 +210,14 @@ export function formatDateTime(t: number) {
     timeZone: "Asia/Kuala_Lumpur",
   });
 }
+
+export const KIND_DOT: Record<AuditKind, string> = {
+  fault: "bg-critical",
+  anomaly: "bg-critical",
+  work_order: "bg-warning",
+  inspection: "bg-info",
+  verification: "bg-success",
+  score: "bg-primary",
+  insight: "bg-primary",
+  system: "bg-muted-foreground",
+};
