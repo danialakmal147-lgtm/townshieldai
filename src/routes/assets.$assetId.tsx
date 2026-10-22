@@ -183,7 +183,7 @@ function AssetDetail() {
             ].map(([k, v]) => (
               <div key={k} className="flex justify-between gap-3 border-b border-border/50 pb-2">
                 <dt className="text-muted-foreground">{k}</dt>
-                <dd className="text-right capitalize-first">{v}</dd>
+                <dd className="text-right">{v}</dd>
               </div>
             ))}
           </dl>
